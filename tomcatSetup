@@ -1,0 +1,103 @@
+$ ls -lrt apache-tomcat-8.5.30.tar.gz 
+-rwxrwxrwx@ 1 keshavkummari  staff  9541892 Apr 10 23:12 apache-tomcat-8.5.30.tar.gz
+$ 
+$ # tar xvzf apache-tomcat-8.5.30.tar.gz 
+$ 
+$ # ls -ld apache-tomcat-8.5.30
+$ 
+$ # mv apache-tomcat-8.5.30 tomcat8
+$ 
+$ ls -ld tomcat8/
+drwxrwxrwx@ 15 keshavkummari  staff  510 Jun 21 22:47 tomcat8/
+$ 
+$ cd tomcat8/
+$ pwd
+/Users/keshavkummari/devtools/tomcat8
+
+
+/Users/keshavkummari/devtools/tomcat8/bin
+$ cd ../conf/
+$ pwd
+/Users/keshavkummari/devtools/tomcat8/conf
+$ ls -lrt server.xml 
+-rw-------@ 1 keshavkummari  staff  7511 Apr 11 15:48 server.xml
+$ 
+$ grep -n 8181 server.xml 
+69:    <Connector port="8181" protocol="HTTP/1.1"
+75:               port="8181" protocol="HTTP/1.1"
+$ 
+$ ls -lrt tomcat-users.xml
+-rw-------@ 1 keshavkummari  staff  2033 May  1 11:12 tomcat-users.xml
+$ 
+$ tail tomcat-users.xml
+  when reading this file. If you wish to configure these users for use with the
+  examples web application, do not forget to remove the <!.. ..> that surrounds
+  them. You will also need to set the passwords to something appropriate.
+-->
+<!--
+-->
+   <role rolename="admin-gui"/>
+   <role rolename="manager-gui"/>
+   <user username="admin" password="tomcat" roles="admin-gui,manager-gui"/>
+</tomcat-users>
+
+$ cd /Users/keshavkummari/devtools/tomcat8/
+
+$ ls -lrta
+total 192
+drwxr-x---@ 27 keshavkummari  staff    918 Apr  4 01:34 lib
+drwxr-x---@  3 keshavkummari  staff    102 Apr  4 01:34 temp
+drwxr-x---@ 25 keshavkummari  staff    850 Apr  4 01:37 bin
+-rw-r-----@  1 keshavkummari  staff  16246 Apr  4 01:37 RUNNING.txt
+-rw-r-----@  1 keshavkummari  staff   7138 Apr  4 01:37 RELEASE-NOTES
+-rw-r-----@  1 keshavkummari  staff   1723 Apr  4 01:37 NOTICE
+-rw-r-----@  1 keshavkummari  staff  57092 Apr  4 01:37 LICENSE
+drwxr-x---@  3 keshavkummari  staff    102 Apr 10 23:22 work
+-rwxrwxrwx@  1 keshavkummari  staff   7511 Apr 11 15:48 server.xml
+-rwxrwxrwx@  1 keshavkummari  staff   2033 May  1 11:12 tomcat-users.xml
+drwxr-x---@  9 keshavkummari  staff    306 May 10 23:07 webapps
+drwxrwxrwx@ 15 keshavkummari  staff    510 Jun 21 22:47 .
+drwx------@ 15 keshavkummari  staff    510 Jun 21 22:47 conf
+drwxrwxrwx  28 keshavkummari  staff    952 Jun 21 22:51 ..
+drwxr-x---@ 91 keshavkummari  staff   3094 Jun 22 09:14 logs
+
+$ cd /Users/keshavkummari/devtools/tomcat8/bin
+$ ls -lrt
+total 1672
+-rw-r-----@ 1 keshavkummari  staff    2026 Apr  4 01:34 version.bat
+-rw-r-----@ 1 keshavkummari  staff    4574 Apr  4 01:34 tool-wrapper.bat
+-rw-r-----@ 1 keshavkummari  staff   49336 Apr  4 01:34 tomcat-juli.jar
+-rw-r-----@ 1 keshavkummari  staff    2022 Apr  4 01:34 startup.bat
+-rw-r-----@ 1 keshavkummari  staff    2020 Apr  4 01:34 shutdown.bat
+-rw-r-----@ 1 keshavkummari  staff    3574 Apr  4 01:34 setclasspath.bat
+-rw-r-----@ 1 keshavkummari  staff    2091 Apr  4 01:34 digest.bat
+-rw-r-----@ 1 keshavkummari  staff    2040 Apr  4 01:34 configtest.bat
+-rw-r-----@ 1 keshavkummari  staff   25145 Apr  4 01:34 commons-daemon.jar
+-rw-r-----@ 1 keshavkummari  staff   15900 Apr  4 01:34 catalina.bat
+-rw-r-----@ 1 keshavkummari  staff   34894 Apr  4 01:34 bootstrap.jar
+-rwxr-x---@ 1 keshavkummari  staff    1908 Apr  4 01:34 version.sh
+-rwxr-x---@ 1 keshavkummari  staff    5483 Apr  4 01:34 tool-wrapper.sh
+-rw-r-----@ 1 keshavkummari  staff  405109 Apr  4 01:34 tomcat-native.tar.gz
+-rwxr-x---@ 1 keshavkummari  staff    1904 Apr  4 01:34 startup.sh
+-rwxr-x---@ 1 keshavkummari  staff    1902 Apr  4 01:34 shutdown.sh
+-rwxr-x---@ 1 keshavkummari  staff    3680 Apr  4 01:34 setclasspath.sh
+-rwxr-x---@ 1 keshavkummari  staff    1965 Apr  4 01:34 digest.sh
+-rwxr-x---@ 1 keshavkummari  staff    8509 Apr  4 01:34 daemon.sh
+-rwxr-x---@ 1 keshavkummari  staff    1922 Apr  4 01:34 configtest.sh
+-rw-r-----@ 1 keshavkummari  staff  207125 Apr  4 01:34 commons-daemon-native.tar.gz
+-rwxr-x---@ 1 keshavkummari  staff   23431 Apr  4 01:34 catalina.sh
+-rw-r-----@ 1 keshavkummari  staff    1664 Apr  4 01:37 catalina-tasks.xml
+
+
+$ ./startup.sh 
+Using CATALINA_BASE:   /Users/keshavkummari/devtools/tomcat8
+Using CATALINA_HOME:   /Users/keshavkummari/devtools/tomcat8
+Using CATALINA_TMPDIR: /Users/keshavkummari/devtools/tomcat8/temp
+Using JRE_HOME:        /Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home
+Using CLASSPATH:       /Users/keshavkummari/devtools/tomcat8/bin/bootstrap.jar:/Users/keshavkummari/devtools/tomcat8/bin/tomcat-juli.jar
+Tomcat started.
+
+
+Go to Browser and open the URL :
+
+http://172.22.23.110:8181/
