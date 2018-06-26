@@ -1,0 +1,245 @@
+
+$ pwd
+/Users/keshavkummari/devtools
+
+$ ls -ld maven/
+drwxrwxrwx@ 9 keshavkummari  staff  306 Apr 11 09:39 maven/
+ 
+$ du -sh maven/
+ 10M	maven/
+
+#=======================================================================#
+
+$ cat /Users/keshavkummari/.bash_profile
+
+# CommandLine 
+export PS1="$ "
+
+# added by Anaconda3 4.3.1 installer
+export PATH="/Users/keshavkummari/anaconda/bin:$PATH"
+
+# Setting PATH for Python 3.6
+# The original version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
+export PATH
+
+# set java
+export JAVA_HOME=$(/usr/libexec/java_home)
+
+# maven settings 
+export M2_HOME=/Users/keshavkummari/devtools/maven/
+export M2=$M2_HOME/bin/
+export PATH=$M2:$PATH
+
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+#=======================================================================#
+
+Java  : Java Home Path & Environment Variables
+Maven : Maven Home Path & Environment Variables
+
+#=======================================================================#
+To communicate to Artifactory : 
+
+File :  settings.xml
+
+File : settings-security.xml
+
+https://maven.apache.org/guides/mini/guide-encryption.html
+
+Create .m2 folder and copy settings.xml & settings-security.xml files :
+
+$ pwd
+/Users/keshavkummari/.m2/
+
+
+$ ls -lrt
+-rw-r--r--@  1 keshavkummari  staff  1329 Apr 13 09:00 settings.xml
+-rw-r--r--@  1 keshavkummari  staff   144 Apr 13 09:00 settings-security.xml
+
+$ cp -pvr /Users/keshavkummari/Downloads/settings.xml  /Users/keshavkummari/.m2/settings.xml
+
+$ cp -pvr /Users/keshavkummari/Downloads/settings-security.xml /Users/keshavkummari/.m2/settings-security.xml
+
+
+$ mvn -version
+Apache Maven 3.5.3 (3383c37e1f9e9b3bc3df5050c29c8aff9f295297; 2018-02-25T01:19:05+05:30)
+Maven home: /Users/keshavkummari/devtools/maven
+Java version: 1.8.0_161, vendor: Oracle Corporation
+Java home: /Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: "mac os x", version: "10.13.5", arch: "x86_64", family: "mac"
+
+# mvn -emp redhat@123
+{Qr4eR5txW+QHd2FWIOdWD3MbOI6ZGuagnSm7hSMpuhk=}
+
+# mvn -ep redhat@123
+{3YCZ8WLL7aMHr2ERv8/IAOD7/jUdSHFRcF2JCzqb0vU=}
+
+$ pwd
+/Users/keshavkummari/.m2
+
+$ cat settings-security.xml 
+<?xml version="1.0" encoding="UTF-8"?>
+<settingsSecurity>
+  <master>{Qr4eR5txW+QHd2FWIOdWD3MbOI6ZGuagnSm7hSMpuhk=}</master>
+</settingsSecurity>
+
+
+$ cat settings.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+  <profiles>
+    <profile>
+      <id>default</id>
+      <repositories>
+        <repository>
+          <id>release</id>
+          <name>release</name>
+          <url>http://localhost:8081/artifactory/libs-release-local</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
+        <repository>
+          <id>snapshot</id>
+          <name>snapshot</name>
+          <url>http://localhost:8081/artifactory/libs-snapshot-local</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+          </snapshots>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <activeProfile>default</activeProfile>
+  </activeProfiles>
+  <servers>
+    <server>
+      <id>release</id>
+      <username>admin</username>
+      <password>{3YCZ8WLL7aMHr2ERv8/IAOD7/jUdSHFRcF2JCzqb0vU=}</password>
+    </server>
+    <server>
+      <id>snapshot</id>
+      <username>admin</username>
+      <password>{3YCZ8WLL7aMHr2ERv8/IAOD7/jUdSHFRcF2JCzqb0vU=}</password>
+    </server>
+  </servers>
+</settings>
+#=======================================================================#
+
+# mvn clean
+
+# mvn help:describe
+
+$ pwd
+/Users/keshavkummari/.m2
+
+$ ls -lrta
+-rw-r--r--@  1 keshavkummari  staff  1329 Apr 13 09:00 settings.xml
+-rw-r--r--@  1 keshavkummari  staff   144 Apr 13 09:00 settings-security.xml
+-rw-r--r--   1 keshavkummari  staff  1117 Apr 26 11:46 settings.xml_nexus
+drwxr-xr-x   6 keshavkummari  staff   204 Apr 26 15:54 .
+drwxr-xr-x  19 keshavkummari  staff   646 Jun 19 10:04 repository
+drwxrwxrwx+ 89 keshavkummari  staff  3026 Jun 25 23:15 ..
+
+$ cd repository/
+$ pwd
+/Users/keshavkummari/.m2/repository
+
+$ ls -lrta
+drwxr-xr-x   4 keshavkummari  staff  136 Apr 26 12:30 io
+drwxr-xr-x   3 keshavkummari  staff  102 Apr 26 12:34 commons-io
+drwxr-xr-x   3 keshavkummari  staff  102 Apr 26 12:36 backport-util-concurrent
+drwxr-xr-x   6 keshavkummari  staff  204 Apr 26 15:54 ..
+drwxr-xr-x   3 keshavkummari  staff  102 Apr 26 18:37 ch
+drwxr-xr-x   3 keshavkummari  staff  102 Apr 26 18:38 ognl
+drwxr-xr-x   4 keshavkummari  staff  136 Apr 26 18:38 javax
+drwxr-xr-x   3 keshavkummari  staff  102 Apr 26 18:38 junit
+drwxr-xr-x   5 keshavkummari  staff  170 Apr 26 18:38 net
+drwxr-xr-x   7 keshavkummari  staff  238 Apr 26 18:38 com
+drwxr-xr-x  24 keshavkummari  staff  816 Apr 26 18:48 org
+drwxr-xr-x   3 keshavkummari  staff  102 Apr 26 18:48 xmlpull
+drwxr-xr-x   3 keshavkummari  staff  102 Apr 26 18:48 xpp3
+drwxr-xr-x   3 keshavkummari  staff  102 Jun 19 10:03 classworlds
+drwxr-xr-x   3 keshavkummari  staff  102 Jun 19 10:03 commons-cli
+drwxr-xr-x   3 keshavkummari  staff  102 Jun 19 10:03 log4j
+drwxr-xr-x   3 keshavkummari  staff  102 Jun 19 10:03 commons-logging
+drwxr-xr-x   3 keshavkummari  staff  102 Jun 19 10:04 nz
+drwxr-xr-x  19 keshavkummari  staff  646 Jun 19 10:04 .
+
+#=======================================================================#
+Below code should be updated under java project and the file is pom.xml 
+#=======================================================================#
+
+<distributionManagement>
+  <repository>
+    <id>release</id>
+    <name>releases</name>
+    <url>http://localhost:8081/artifactory/libs-release-local</url>
+  </repository>
+  <snapshotRepository>
+    <id>snapshot</id>
+    <name>snapshots</name>
+    <url>http://localhost:8081/artifactory/libs-snapshot-local</url>
+  </snapshotRepository>
+</distributionManagement>
+
+<scm>
+  <connection>scm:git:git@github.com:devopskeshav/devops-java01.git</connection>
+  <developerConnection>scm:git:git@github.com:devopskeshav/devops-java01.git</developerConnection>
+  <url>git@github.com:devopskeshav/devops-java01.git</url>
+  <tag>HEAD</tag>
+</scm>
+
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-release-plugin</artifactId>
+  <version>2.5.1</version>
+  <configuration>
+    <tagNameFormat>v@{project.version}</tagNameFormat>
+    <autoVersionSubmodules>true</autoVersionSubmodules>
+  </configuration>
+</plugin>
+
+
+#=======================================================================#
+Go to local Code Repo and pull the code and update the local repo:
+#=======================================================================#
+
+# git status
+
+# git fetch
+
+# git pull
+
+# git status
+
+# mvn clean package deploy
+
+Note :  Go to .m2 folder and verify 
+
+
+FOR ERROR : 
+
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-help-plugin:2.2:describe (default-cli) on project devops-java01: You must specify either: both 'groupId' and 'artifactId' parameters OR a 'plugin' parameter OR a 'cmd' parameter. For instance:
+[ERROR]   # mvn help:describe -Dcmd=install
+[ERROR] or
+[ERROR]   # mvn help:describe -Dcmd=help:describe
+[ERROR] or
+[ERROR]   # mvn help:describe -Dplugin=org.apache.maven.plugins:maven-help-plugin
+[ERROR] or
+[ERROR]   # mvn help:describe -DgroupId=org.apache.maven.plugins -DartifactId=maven-help-plugin
+[ERROR] 
+[ERROR] Try 'mvn help:help -Ddetail=true' for more information.
