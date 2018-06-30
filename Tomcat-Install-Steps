@@ -1,0 +1,39 @@
+
+
+STEP-1 : 
+
+# java -version
+
+# yum install jdk-1.8* 
+
+# mvn -version
+
+# yum install maven* 
+
+STEP-2 : Download the Tomcat
+
+# wget http://www-eu.apache.org/dist/tomcat/tomcat-8/v8.5.32/bin/apache-tomcat-8.5.32.tar.gz
+
+# tar xvzf apache-tomcat-8.5.32.tar.gz
+
+# mv apache-tomcat-8.5.32 tomcat8
+
+# cd tomcat8/
+
+# cd bin
+
+./startup.sh
+
+ps -aux | grep tomcat
+
+# firewall-cmd --list-all 
+
+# firewall-cmd --permanent --add-port=8080/tcp
+
+# firewall-cmd --reload 
+
+# firewall-cmd --list-all 
+
+STEP-3 : Go to Windows Machine and Open any browser and check the tomcat status
+
+http://172.23.24.186:8080/
